@@ -28,5 +28,9 @@
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
+  ],
+  "typeRoots": [
+    "../node_modules/@types",
+    "../@types"
   ]
 }

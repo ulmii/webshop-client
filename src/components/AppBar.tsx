@@ -8,6 +8,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import {Link as RouterLink} from 'react-router-dom';
+import {Link} from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,6 +43,17 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const preventDefault = (event: React.SyntheticEvent) =>
+    event.preventDefault();
+
+  const MyLink = (props: JSX.IntrinsicAttributes) => (
+    <RouterLink to="/products" {...props} />
+  );
+
+  const HomeLink = (props: JSX.IntrinsicAttributes) => (
+    <RouterLink to="/" {...props} />
+  );
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -54,7 +67,14 @@ export default function MenuAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Shop
+            <Link color="inherit" component={HomeLink}>
+              Home
+            </Link>
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
+            <Link color="inherit" component={MyLink}>
+              Shop
+            </Link>
           </Typography>
           {auth && (
             <div>

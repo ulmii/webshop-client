@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {IProduct} from '../interface';
 import ShopContext from '../contexts/ShopContext';
 import useBasket from '../hooks/useBasket';
+import MenuAppBar from './AppBar';
 
 export const Products = () => {
   const {products} = useContext(ShopContext);
@@ -9,6 +10,7 @@ export const Products = () => {
 
   return (
     <div>
+      <MenuAppBar />
       <div className="products">
         <ul>
           {products.map((product: IProduct) => (
