@@ -5,6 +5,7 @@ import useBasket from '../hooks/useBasket';
 import MenuAppBar from './AppBar';
 
 export const Products = () => {
+  const authToken = localStorage.getItem('authToken');
   const {products} = useContext(ShopContext);
   const {basket, addProduct, removeProduct} = useBasket();
 
