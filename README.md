@@ -10,8 +10,13 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=sqale_index)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
 
-# Dockerhub
+# Webshop client - ebiznes project 
+
+## Dockerhub
 https://hub.docker.com/repository/docker/ulmii/webshop-client
+
+## Azure cloud
+https://webshop-client.azurewebsites.net
 
 # Getting Started with Create React App
 
