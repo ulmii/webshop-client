@@ -1,3 +1,4 @@
+![Workflow](https://github.com/ulmii/webshop-client/actions/workflows/main_webshop-client.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=alert_status)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=bugs)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=code_smells)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
