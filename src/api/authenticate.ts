@@ -2,7 +2,7 @@ export const authenticate = async (
   email: String,
   password: String
 ): Promise<string | null | void> => {
-  return await fetch('http://localhost:9000/auth/signIn', {
+  return await fetch(process.env.REACT_APP_APIHOST + '/auth/signIn', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

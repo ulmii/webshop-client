@@ -1,9 +1,5 @@
-import {Component} from 'react';
+export default function Welcome() {
+  console.log(localStorage.getItem('authToken'));
 
-class Welcome extends Component<{}, {}> {
-  render() {
-    return 'Mój nowy sklep';
-  }
+  return 'Mój nowy sklep';
 }
-
-export default Welcome;

@@ -5,6 +5,8 @@ import {ShopContextProvider} from './contexts/ShopContext';
 import {Route} from 'react-router-dom';
 import Welcome from './components/Welcome';
 import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import SSORedirect from './components/SSORedirect';
 
 function App() {
   return (
@@ -20,6 +22,12 @@ function App() {
         </Route>
         <Route path="/login">
           <SignIn />
+        </Route>
+        <Route path="/register">
+          <SignUp />
+        </Route>
+        <Route path="/sso">
+          <SSORedirect />
         </Route>
       </div>
     </div>
