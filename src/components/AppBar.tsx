@@ -9,18 +9,19 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import {Link as RouterLink} from 'react-router-dom';
-import {Link} from '@material-ui/core';
+import {FormLabel, Grid, Link, Paper, RadioGroup} from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
+    paper: {
+      height: 140,
+      width: 100,
     },
-    title: {
-      flexGrow: 1,
+    control: {
+      padding: theme.spacing(2),
     },
   })
 );
@@ -50,24 +51,26 @@ export default function MenuAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            <Link color="inherit" to="/home" component={RouterLink}>
-              Home
-            </Link>
-          </Typography>
-          <Typography variant="h6" className={classes.title}>
-            <Link color="inherit" to="/products" component={RouterLink}>
-              Shop
-            </Link>
-          </Typography>
+          <Grid container className={classes.root} spacing={2}>
+            <Grid item xs={12}>
+              <Grid container justify="center" spacing={2}>
+                <Grid item>
+                  <Typography variant="h6">
+                    <Link color="inherit" to="/" component={RouterLink}>
+                      Home
+                    </Link>
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h6">
+                    <Link color="inherit" to="/products" component={RouterLink}>
+                      Products
+                    </Link>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
           {auth && (
             <div>
               <IconButton
