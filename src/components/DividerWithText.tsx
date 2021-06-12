@@ -1,6 +1,6 @@
 import React from 'react';
-import {Box, makeStyles} from '@material-ui/core';
-import {Grid, Divider as MuiDivider} from '@material-ui/core';
+import {Divider as MuiDivider, Grid, makeStyles} from '@material-ui/core';
+
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',

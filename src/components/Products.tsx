@@ -1,7 +1,4 @@
-import React, {useContext} from 'react';
-import {IProduct} from '../interface';
-import ShopContext from '../contexts/ShopContext';
-import useBasket from '../hooks/useBasket';
+import React from 'react';
 import MenuAppBar from './AppBar';
 import Album from './Album';
 
