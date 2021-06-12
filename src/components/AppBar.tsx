@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import {Link as RouterLink} from 'react-router-dom';
 import {Grid, Link} from '@material-ui/core';
+import fetchProfile from '../api/profile';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +28,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MenuAppBar() {
   const classes = useStyles();
+  const authToken = localStorage.getItem('authToken');
   const [auth, setAuth] = React.useState(false);
+
+  if (authToken) {
+    fetchProfile(authToken).then(profile => {
+      if (profile) {
+        console.log('EMAIL ' + profile.email);
+        setAuth(true);
+      }
+    });
+  }
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -37,6 +49,11 @@ export default function MenuAppBar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logOut = () => {
+    localStorage.setItem('authToken', '');
+    window.location.reload();
   };
 
   return (
@@ -93,6 +110,14 @@ export default function MenuAppBar() {
                   <div>
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem onClick={handleClose}>My account</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        logOut();
+                      }}
+                    >
+                      Log out
+                    </MenuItem>
                   </div>
                 ) : (
                   <div>

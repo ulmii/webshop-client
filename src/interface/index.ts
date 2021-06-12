@@ -12,3 +12,7 @@ export interface IProduct {
 export type IShopContextState = {
   products: IProduct[];
 };
+
+export interface IProfile {
+  email: string;
+}
