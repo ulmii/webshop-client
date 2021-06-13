@@ -1,9 +1,10 @@
-import {useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {IProduct} from '../interface';
 import {updateBasket} from '../api/basket';
+import BasketContext from '../contexts/BasketContext';
 
 function useBasket() {
-  const [basket, setBasket] = useState<IProduct[]>([]);
+  const {basket, setBasket} = useContext(BasketContext);
 
   function addProduct(product: IProduct) {
     const updatedBasket = [product, ...basket];
@@ -17,7 +18,7 @@ function useBasket() {
   function removeProduct(id: number) {
     const filteredProducts = basket.filter(product => product.id !== id);
 
-    setBasket([...filteredProducts]);
+    setBasket(filteredProducts);
     updateBasket({userId: '', products: [...filteredProducts]}).catch(e =>
       console.log(e)
     );

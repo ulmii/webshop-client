@@ -1,20 +1,19 @@
 import React from 'react';
 import './App.css';
 import {Products} from './components/Products';
-import {ShopContextProvider} from './contexts/ShopContext';
 import {Route} from 'react-router-dom';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SSORedirect from './components/SSORedirect';
 import Checkout from './components/Checkout';
-import {Basket} from './components/Basket';
+import {BasketContextProvider} from './contexts/BasketContext';
 
 function App() {
   return (
     <div className="App">
       <div>
-        <ShopContextProvider>
+        <BasketContextProvider>
           <Route exact path="/">
             <Home />
           </Route>
@@ -33,10 +32,7 @@ function App() {
           <Route path="/checkout">
             <Checkout />
           </Route>
-          <Route path="/basket">
-            <Basket />
-          </Route>
-        </ShopContextProvider>
+        </BasketContextProvider>
       </div>
     </div>
   );

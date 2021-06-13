@@ -11,7 +11,7 @@ import {Link as RouterLink} from 'react-router-dom';
 import {Grid, Link} from '@material-ui/core';
 import fetchProfile from '../api/profile';
 import {Redirect} from 'react-router';
-import MenuIcon from '@material-ui/icons/Menu';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import useBasket from '../hooks/useBasket';
 import {IProduct} from '../interface';
 
@@ -62,7 +62,9 @@ export default function MenuAppBar() {
   };
 
   const handleBasket = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorBasket(event.currentTarget);
+    if (basket.length !== 0) {
+      setAnchorBasket(event.currentTarget);
+    }
   };
 
   const handleClose = () => {
@@ -95,9 +97,9 @@ export default function MenuAppBar() {
             aria-label="menu"
             aria-controls="menu-basket"
             aria-haspopup="true"
-            onClick={() => console.log(basket)}
+            onClick={handleBasket}
           >
-            <MenuIcon />
+            <ShoppingBasketIcon />
           </IconButton>
           <Menu
             id="menu-basket"
@@ -114,16 +116,9 @@ export default function MenuAppBar() {
             open={openBasket}
             onClose={handleCloseBasket}
           >
-            <MenuItem>
-              {basket.map((product: IProduct) => (
-                <li>
-                  {product.title}
-                  <button onClick={() => removeProduct(product.id)}>
-                    remove product
-                  </button>
-                </li>
-              ))}
-            </MenuItem>
+            {basket.map((product: IProduct) => (
+              <MenuItem key={product.title}>{product.title}</MenuItem>
+            ))}
           </Menu>
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>

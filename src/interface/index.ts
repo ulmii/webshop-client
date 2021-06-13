@@ -21,3 +21,8 @@ export interface IBasket {
   userId: string;
   products: IProduct[];
 }
+
+export type IBasketContextState = {
+  basket: IProduct[];
+  setBasket: (basket: IProduct[]) => void;
+};
