@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Link as RouterLink} from 'react-router-dom';
 import Copyright from './Copyright';
+import register from '../api/register';
+import {Redirect} from 'react-router';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -35,6 +37,25 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+  const [referrer, setReferrer] = useState<string>('');
+
+  const signUp = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    register(email, password).then(response => {
+      if (response) {
+        setReferrer('/login');
+        setRedirectToReferrer(true);
+      }
+    });
+  };
+
+  if (redirectToReferrer) {
+    return <Redirect to={referrer} />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -46,7 +67,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={signUp}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -57,6 +78,8 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -69,6 +92,8 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>

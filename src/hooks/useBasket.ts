@@ -1,18 +1,26 @@
 import {useState} from 'react';
 import {IProduct} from '../interface';
+import {updateBasket} from '../api/basket';
 
 function useBasket() {
   const [basket, setBasket] = useState<IProduct[]>([]);
 
   function addProduct(product: IProduct) {
-    console.log(...basket);
-    setBasket([...basket, product]);
+    const updatedBasket = [product, ...basket];
+    setBasket(updatedBasket);
+
+    updateBasket({userId: '', products: updatedBasket}).catch(e =>
+      console.log(e)
+    );
   }
 
   function removeProduct(id: number) {
     const filteredProducts = basket.filter(product => product.id !== id);
 
     setBasket([...filteredProducts]);
+    updateBasket({userId: '', products: [...filteredProducts]}).catch(e =>
+      console.log(e)
+    );
   }
 
   return {

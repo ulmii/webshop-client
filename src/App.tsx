@@ -7,28 +7,36 @@ import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SSORedirect from './components/SSORedirect';
+import Checkout from './components/Checkout';
+import {Basket} from './components/Basket';
 
 function App() {
   return (
     <div className="App">
       <div>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/products">
-          <ShopContextProvider>
+        <ShopContextProvider>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/products">
             <Products />
-          </ShopContextProvider>
-        </Route>
-        <Route path="/login">
-          <SignIn />
-        </Route>
-        <Route path="/register">
-          <SignUp />
-        </Route>
-        <Route path="/sso">
-          <SSORedirect />
-        </Route>
+          </Route>
+          <Route path="/login">
+            <SignIn />
+          </Route>
+          <Route path="/register">
+            <SignUp />
+          </Route>
+          <Route path="/sso">
+            <SSORedirect />
+          </Route>
+          <Route path="/checkout">
+            <Checkout />
+          </Route>
+          <Route path="/basket">
+            <Basket />
+          </Route>
+        </ShopContextProvider>
       </div>
     </div>
   );

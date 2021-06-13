@@ -5,7 +5,7 @@ import useBasket from '../hooks/useBasket';
 
 export type BasketProps = React.ReactHTML;
 
-export const Basket = (props: BasketProps) => {
+export const Basket = () => {
   const {products} = useContext(ShopContext);
   const {basket, addProduct, removeProduct} = useBasket();
 

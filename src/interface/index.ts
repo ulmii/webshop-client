@@ -16,3 +16,8 @@ export type IShopContextState = {
 export interface IProfile {
   email: string;
 }
+
+export interface IBasket {
+  userId: string;
+  products: IProduct[];
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +10,10 @@ import Menu from '@material-ui/core/Menu';
 import {Link as RouterLink} from 'react-router-dom';
 import {Grid, Link} from '@material-ui/core';
 import fetchProfile from '../api/profile';
+import {Redirect} from 'react-router';
+import MenuIcon from '@material-ui/icons/Menu';
+import useBasket from '../hooks/useBasket';
+import {IProduct} from '../interface';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
     control: {
       padding: theme.spacing(2),
     },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
   })
 );
 
@@ -30,6 +37,9 @@ export default function MenuAppBar() {
   const classes = useStyles();
   const authToken = localStorage.getItem('authToken');
   const [auth, setAuth] = React.useState(false);
+  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+  const [referrer, setReferrer] = useState<string>('');
+  const {basket, addProduct, removeProduct} = useBasket();
 
   if (authToken) {
     fetchProfile(authToken).then(profile => {
@@ -41,25 +51,80 @@ export default function MenuAppBar() {
   }
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorBasket, setAnchorBasket] = React.useState<null | HTMLElement>(
+    null
+  );
   const open = Boolean(anchorEl);
+  const openBasket = Boolean(anchorBasket);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleBasket = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorBasket(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  const handleCloseBasket = () => {
+    setAnchorBasket(null);
+  };
+
   const logOut = () => {
     localStorage.setItem('authToken', '');
+    setReferrer('/');
+    setRedirectToReferrer(true);
     window.location.reload();
   };
+
+  if (redirectToReferrer) {
+    return <Redirect to={referrer} />;
+  }
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+            aria-controls="menu-basket"
+            aria-haspopup="true"
+            onClick={() => console.log(basket)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="menu-basket"
+            anchorEl={anchorBasket}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            open={openBasket}
+            onClose={handleCloseBasket}
+          >
+            <MenuItem>
+              {basket.map((product: IProduct) => (
+                <li>
+                  {product.title}
+                  <button onClick={() => removeProduct(product.id)}>
+                    remove product
+                  </button>
+                </li>
+              ))}
+            </MenuItem>
+          </Menu>
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
               <Grid container justify="center" spacing={2}>
@@ -108,8 +173,12 @@ export default function MenuAppBar() {
               <div>
                 {auth ? (
                   <div>
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                    <MenuItem to="/account" component={RouterLink}>
+                      My account
+                    </MenuItem>
+                    <MenuItem to="/checkout" component={RouterLink}>
+                      Checkout
+                    </MenuItem>
                     <MenuItem
                       onClick={() => {
                         handleClose();
