@@ -3,7 +3,6 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=bugs)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=code_smells)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=ncloc)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ulmii_webshop-client&metric=security_rating)](https://sonarcloud.io/dashboard?id=ulmii_webshop-client)
