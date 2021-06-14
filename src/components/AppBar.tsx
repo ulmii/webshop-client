@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,6 +14,8 @@ import {Redirect} from 'react-router';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import useBasket from '../hooks/useBasket';
 import {IProduct} from '../interface';
+import fetchBasket from '../api/basket';
+import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +41,7 @@ export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(false);
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const [referrer, setReferrer] = useState<string>('');
-  const {basket, addProduct, removeProduct} = useBasket();
+  const {basket, initBasket, removeProduct} = useBasket();
 
   if (authToken) {
     fetchProfile(authToken).then(profile => {
@@ -49,6 +51,15 @@ export default function MenuAppBar() {
       }
     });
   }
+
+  useEffect(() => {
+    console.log('init basket');
+    if (authToken) {
+      fetchBasket(authToken)
+        .then(b => initBasket(b.products))
+        .catch(e => console.log(e));
+    }
+  }, []);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorBasket, setAnchorBasket] = React.useState<null | HTMLElement>(
@@ -117,7 +128,12 @@ export default function MenuAppBar() {
             onClose={handleCloseBasket}
           >
             {basket.map((product: IProduct) => (
-              <MenuItem key={product.title}>{product.title}</MenuItem>
+              <MenuItem key={product.key}>
+                {product.title}{' '}
+                <RemoveShoppingCartIcon
+                  onClick={() => removeProduct(product.key)}
+                />
+              </MenuItem>
             ))}
           </Menu>
           <Grid container className={classes.root} spacing={2}>

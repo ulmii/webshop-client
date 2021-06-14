@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -13,7 +13,6 @@ import Review from './Review';
 import Copyright from './Copyright';
 import MenuAppBar from './AppBar';
 import fetchProfile from '../api/profile';
-import {Redirect} from 'react-router';
 
 const useStyles = makeStyles(theme => ({
   appBar: {

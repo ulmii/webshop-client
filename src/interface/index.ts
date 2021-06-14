@@ -1,7 +1,6 @@
-type Dispatch<A> = (value: A) => void;
-
 export interface IProduct {
-  id: number;
+  key: string;
+  id: string;
   title: string;
   description: string;
   price: number;

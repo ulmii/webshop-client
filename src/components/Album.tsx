@@ -48,7 +48,7 @@ export default function Album() {
           <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
               {data.map(product => (
-                <Grid item key={product.title} xs={12} sm={6} md={4}>
+                <Grid item key={product.id} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}

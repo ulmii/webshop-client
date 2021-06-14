@@ -11,11 +11,6 @@ export const BasketContext = React.createContext(defaultValue);
 export const BasketContextProvider: React.FC = ({children}) => {
   const [basket, setBasket] = useState<IProduct[]>([]);
 
-  const providerValue: IBasketContextState = {
-    basket,
-    setBasket,
-  };
-
   return (
     <BasketContext.Provider value={{basket, setBasket}}>
       {children}
